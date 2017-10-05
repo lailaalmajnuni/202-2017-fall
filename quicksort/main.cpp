@@ -7,24 +7,28 @@ using namespace std;
 void quicksort(int a[], int s, int e) {
 	// If there are less than 2 values to sort,
 	// then there is nothing to do.
+	// this is the escape point so the funcation doesn't call itself over and over.
 	if (e - s < 1) return;
 
-	// Use last value in range [s, e] as pivot.
+	// Use last value in range [s, e] as pivot or any random value.
 
 	// Re-organize range so that values less than pivot
 	// are located before pivot and values greater than
 	// pivot are after pivot.
 
-	// Scan range [a, e] from left to right; 
+	// Scan range [s, e] from left to right; 
 	// move elements less than pivot to front of range.
 
 	int i = s - 1; 
+	// i is going to be the place where we going to swip the value into.
 	for (int j = s; j < e; ++j) {
 		if (a[j] < a[e]) swap(a[++i], a[j]);
 	}
 	swap(a[++i], a[e]);
 
 	// Sort values before pivot.
+	// this where we called the funtion in itself again.
+	// i is the pivat and we don't need to included again thats why we uesed the adderss i-1 and i+1.
 	quicksort(a, s, i - 1);
 
 	// Sort values after pivot.
@@ -37,7 +41,7 @@ bool sorted(int a[], int n) {
 	}
 	return true;
 }
-
+	//just a test code to see if the actually sort function is working.
 int main(int argc, char * args[]) {
 	int a[] = { 2, -9, 122, 45, -7, 33, -7, 16, 99, 21 };
 	quicksort(a, 0, 9);
